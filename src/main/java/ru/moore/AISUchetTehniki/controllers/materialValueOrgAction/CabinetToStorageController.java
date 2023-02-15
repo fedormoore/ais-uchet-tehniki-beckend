@@ -9,7 +9,7 @@ import ru.moore.AISUchetTehniki.models.Dto.MaterialValueOrgDto;
 import ru.moore.AISUchetTehniki.models.Dto.OnSave;
 import ru.moore.AISUchetTehniki.models.Dto.View;
 import ru.moore.AISUchetTehniki.models.Dto.materialValueOrgAction.CabinetToStorageDto;
-import ru.moore.AISUchetTehniki.services.materialValueOrgAction.CabinetToStorageService;
+import ru.moore.AISUchetTehniki.services.impl.materialValueOrgAction.CabinetToStorageServiceImpl;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -21,14 +21,14 @@ import java.util.List;
 @Validated
 public class CabinetToStorageController {
 
-    private final CabinetToStorageService cabinetToStorageService;
+    private final CabinetToStorageServiceImpl cabinetToStorageServiceImpl;
 
     @JsonView(View.RESPONSE.class)
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
     @Validated(OnSave.class)
     public List<MaterialValueOrgDto> saveStorageToRegistry(@JsonView(View.SAVE.class) @Valid @RequestBody(required = false) List<CabinetToStorageDto> cabinetToStorageDtoList) {
-        return cabinetToStorageService.saveCabinetToStorage(cabinetToStorageDtoList);
+        return cabinetToStorageServiceImpl.saveCabinetToStorage(cabinetToStorageDtoList);
     }
 
 }

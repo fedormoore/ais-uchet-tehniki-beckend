@@ -1,7 +1,6 @@
-package ru.moore.AISUchetTehniki.services.materialValueOrgAction;
+package ru.moore.AISUchetTehniki.services.impl.materialValueOrgAction;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.moore.AISUchetTehniki.enums.LocationTypeEnum;
@@ -13,24 +12,21 @@ import ru.moore.AISUchetTehniki.models.Entity.Reason;
 import ru.moore.AISUchetTehniki.models.Entity.spr.Location;
 import ru.moore.AISUchetTehniki.repositories.MaterialValueOrgRepository;
 import ru.moore.AISUchetTehniki.services.MaterialValueOrgService;
-import ru.moore.AISUchetTehniki.services.MaterialValueOrgHistoryService;
-import ru.moore.AISUchetTehniki.services.mappers.MapperUtils;
 import ru.moore.AISUchetTehniki.services.ReasonService;
+import ru.moore.AISUchetTehniki.utils.MapperUtils;
 import ru.moore.AISUchetTehniki.services.spr.LocationService;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class CabinetToStorageService {
+public class CabinetToStorageServiceImpl {
 
     private final MaterialValueOrgRepository materialValueOrgRepository;
     private final MaterialValueOrgService materialValueOrgService;
     private final LocationService locationService;
-    private final MaterialValueOrgHistoryService materialValueOrgHistoryService;
     private final ReasonService reasonService;
     private final MapperUtils mapperUtils;
 

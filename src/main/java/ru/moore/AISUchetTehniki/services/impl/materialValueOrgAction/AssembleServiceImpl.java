@@ -1,4 +1,4 @@
-package ru.moore.AISUchetTehniki.services.materialValueOrgAction;
+package ru.moore.AISUchetTehniki.services.impl.materialValueOrgAction;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -23,20 +23,22 @@ import ru.moore.AISUchetTehniki.repositories.IndexBRepository;
 import ru.moore.AISUchetTehniki.repositories.MaterialValueOrgRepository;
 import ru.moore.AISUchetTehniki.security.UserPrincipal;
 import ru.moore.AISUchetTehniki.services.AccountService;
-import ru.moore.AISUchetTehniki.services.MaterialValueOrgService;
 import ru.moore.AISUchetTehniki.services.MaterialValueOrgHistoryService;
-import ru.moore.AISUchetTehniki.services.mappers.MapperUtils;
+import ru.moore.AISUchetTehniki.services.MaterialValueOrgService;
 import ru.moore.AISUchetTehniki.services.ReasonService;
 import ru.moore.AISUchetTehniki.services.spr.BudgetAccountService;
-import ru.moore.AISUchetTehniki.services.spr.MaterialValueService;
 import ru.moore.AISUchetTehniki.services.spr.LocationService;
+import ru.moore.AISUchetTehniki.services.spr.MaterialValueService;
 import ru.moore.AISUchetTehniki.services.spr.UserService;
+import ru.moore.AISUchetTehniki.utils.MapperUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class AssembleService {
+public class AssembleServiceImpl {
 
     private final MaterialValueOrgRepository materialValueOrgRepository;
     private final IndexBRepository indexBRepository;
@@ -53,6 +55,7 @@ public class AssembleService {
     String barcodeAccount = null;
     String barcodeDevice = null;
     String barcodeAddDevice = null;
+
     @Transactional
     public List<MaterialValueOrgDto> saveAssemble(List<AssembleDto> assembleDtoList, Authentication authentication) {
         try {
@@ -93,7 +96,7 @@ public class AssembleService {
                 //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ ORGANIZATION ПО ID
                 Reason reasonStatement = reasonService.findById(assembleDto.getStatementId()).orElse(null);
 
-               MaterialValueOrg materialValueOrg = new MaterialValueOrg();
+                MaterialValueOrg materialValueOrg = new MaterialValueOrg();
                 materialValueOrg.setBarcode(generateBarcode(String.valueOf(materialValue.getIndexB())));
                 materialValueOrg.setMaterialValue(materialValue);
                 materialValueOrg.setLocation(location);
@@ -121,7 +124,7 @@ public class AssembleService {
         }
     }
 
-    private String generateBarcode(String materialValueIndexB){
+    private String generateBarcode(String materialValueIndexB) {
         barcodeAddDevice = String.valueOf(Integer.valueOf(barcodeAddDevice) + 1);
         if (barcodeAddDevice.length() >= 3) {
             barcodeAddDevice = "0" + barcodeAddDevice;
@@ -146,7 +149,7 @@ public class AssembleService {
         }
         List<MaterialValueOrg> returnAssembleChildrenList = new ArrayList<>();
         for (AssembleDto.AssembleSpecDto assembleSpecDto : assembleSpecDtoList) {
-           MaterialValueOrg materialValueOrg = materialValueOrgService.findById(assembleSpecDto.getId()).orElse(null);
+            MaterialValueOrg materialValueOrg = materialValueOrgService.findById(assembleSpecDto.getId()).orElse(null);
             if (materialValueOrg.getParent() != null) {
                 throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "У материальной ценности с ID " + assembleSpecDto.getId() + " есть родитель!");
             }

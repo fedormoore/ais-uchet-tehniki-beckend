@@ -21,18 +21,18 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MaterialValueOrgHistoryController {
 
-    private final MaterialValueOrgHistoryService historyService;
+    private final MaterialValueOrgHistoryService materialValueOrgHistoryService;
 
     @JsonView(View.RESPONSE.class)
     @GetMapping("/registry/{id}")
     public List<MaterialValueOrgHistoryDto> getAllHistoryByRegistryId(@PathVariable UUID id) {
-        return historyService.getAllHistoryByRegistryId(id);
+        return materialValueOrgHistoryService.getAllHistoryByRegistryId(id);
     }
 
     @JsonView(View.RESPONSE.class)
     @GetMapping("/reason/{id}")
     public List<MaterialValueOrgHistoryDto> getAllHistoryByReasonId(@PathVariable UUID id) {
-        return historyService.getAllHistoryByReasonId(id);
+        return materialValueOrgHistoryService.getAllHistoryByReasonId(id);
     }
 
     @JsonView(View.RESPONSE.class)
@@ -40,7 +40,7 @@ public class MaterialValueOrgHistoryController {
     @ResponseStatus(HttpStatus.CREATED)
     @Validated(OnSave.class)
     public List<MaterialValueOrgHistoryDto> saveHistory(@JsonView(View.SAVE.class) @Valid @RequestBody List<MaterialValueOrgHistoryDto> materialValueOrgHistoryDtoList) {
-        return historyService.saveHistory(materialValueOrgHistoryDtoList);
+        return materialValueOrgHistoryService.saveHistory(materialValueOrgHistoryDtoList);
     }
 
     @JsonView(View.RESPONSE.class)
@@ -48,30 +48,30 @@ public class MaterialValueOrgHistoryController {
     @ResponseStatus(HttpStatus.CREATED)
     @Validated(OnDelete.class)
     public List<MaterialValueOrgHistoryDto> deleteReasonInHistory(@JsonView(View.DELETE.class) @Valid @RequestBody List<MaterialValueOrgHistoryDto> materialValueOrgHistoryDtoList) {
-        return historyService.deleteReasonInHistory(materialValueOrgHistoryDtoList);
+        return materialValueOrgHistoryService.deleteReasonInHistory(materialValueOrgHistoryDtoList);
     }
 
     @JsonView(View.RESPONSE.class)
     @GetMapping("/contract/{id}")
     public List<MaterialValueOrgHistoryDto> findAllForContractByReasonIsNullOrByReason(@PathVariable UUID id) {
-        return historyService.findAllForContractByReasonIsNullOrByReason(id);
+        return materialValueOrgHistoryService.findAllForContractByReasonIsNullOrByReason(id);
     }
 
     @JsonView(View.RESPONSE.class)
     @GetMapping("/contract")
     public List<MaterialValueOrgHistoryDto> findAllForContractByReasonIsNull() {
-        return historyService.findAllForContractByReasonIsNull();
+        return materialValueOrgHistoryService.findAllForContractByReasonIsNull();
     }
 
     @JsonView(View.RESPONSE.class)
     @GetMapping("/statement/{id}")
     public List<MaterialValueOrgHistoryDto> findAllForStatementByReasonIsNullOrByReason(@PathVariable UUID id) {
-        return historyService.findAllForStatementByReasonIsNullOrByReason(id);
+        return materialValueOrgHistoryService.findAllForStatementByReasonIsNullOrByReason(id);
     }
 
     @JsonView(View.RESPONSE.class)
     @GetMapping("/statement")
     public List<MaterialValueOrgHistoryDto> findAllForStatementByReasonIsNull() {
-        return historyService.findAllForStatementByReasonIsNull();
+        return materialValueOrgHistoryService.findAllForStatementByReasonIsNull();
     }
 }

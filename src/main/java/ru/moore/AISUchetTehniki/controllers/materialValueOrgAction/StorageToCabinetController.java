@@ -21,14 +21,14 @@ import java.util.List;
 @Validated
 public class StorageToCabinetController {
 
-    private final StorageToCabinetService storageStorageToRegistryService;
+    private final StorageToCabinetService storageToCabinetService;
 
     @JsonView(View.RESPONSE.class)
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
     @Validated(OnSave.class)
     public List<MaterialValueOrgDto> saveStorageToCabinet(@JsonView(View.SAVE.class) @Valid @RequestBody(required = false) List<StorageToCabinetDto> storageToCabinetDtoList) {
-        return storageStorageToRegistryService.saveStorageToCabinet(storageToCabinetDtoList);
+        return storageToCabinetService.saveStorageToCabinet(storageToCabinetDtoList);
     }
 
 }

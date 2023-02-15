@@ -9,7 +9,7 @@ import ru.moore.AISUchetTehniki.models.Dto.MaterialValueOrgDto;
 import ru.moore.AISUchetTehniki.models.Dto.OnSave;
 import ru.moore.AISUchetTehniki.models.Dto.View;
 import ru.moore.AISUchetTehniki.models.Dto.materialValueOrgAction.AddDeviceDto;
-import ru.moore.AISUchetTehniki.services.materialValueOrgAction.AddDeviceService;
+import ru.moore.AISUchetTehniki.services.impl.materialValueOrgAction.AddDeviceServiceImpl;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -21,14 +21,14 @@ import java.util.List;
 @Validated
 public class AddDeviceController {
 
-    private final AddDeviceService addDeviceService;
+    private final AddDeviceServiceImpl addDeviceServiceImpl;
 
     @JsonView(View.RESPONSE.class)
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
     @Validated(OnSave.class)
     public List<MaterialValueOrgDto> saveAddDevice(@JsonView(View.SAVE.class) @Valid @RequestBody(required = false) List<AddDeviceDto> addDeviceDtoList) {
-        return addDeviceService.saveAddDevice(addDeviceDtoList);
+        return addDeviceServiceImpl.saveAddDevice(addDeviceDtoList);
     }
 
 }

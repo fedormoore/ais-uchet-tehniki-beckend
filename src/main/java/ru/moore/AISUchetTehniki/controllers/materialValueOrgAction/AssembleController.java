@@ -10,7 +10,7 @@ import ru.moore.AISUchetTehniki.models.Dto.MaterialValueOrgDto;
 import ru.moore.AISUchetTehniki.models.Dto.OnSave;
 import ru.moore.AISUchetTehniki.models.Dto.View;
 import ru.moore.AISUchetTehniki.models.Dto.materialValueOrgAction.AssembleDto;
-import ru.moore.AISUchetTehniki.services.materialValueOrgAction.AssembleService;
+import ru.moore.AISUchetTehniki.services.impl.materialValueOrgAction.AssembleServiceImpl;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,14 +22,14 @@ import java.util.List;
 @Validated
 public class AssembleController {
 
-    private final AssembleService assembleService;
+    private final AssembleServiceImpl assembleServiceImpl;
 
     @JsonView(View.RESPONSE.class)
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
     @Validated(OnSave.class)
     public List<MaterialValueOrgDto> saveIncome(@JsonView(View.SAVE.class) @Valid @RequestBody(required = false) List<AssembleDto> assembleDtoList, Authentication authentication) {
-        return assembleService.saveAssemble(assembleDtoList, authentication);
+        return assembleServiceImpl.saveAssemble(assembleDtoList, authentication);
     }
 
 }

@@ -1,4 +1,4 @@
-package ru.moore.AISUchetTehniki.services.materialValueOrgAction;
+package ru.moore.AISUchetTehniki.services.impl.materialValueOrgAction;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -12,10 +12,10 @@ import ru.moore.AISUchetTehniki.models.Dto.materialValueOrgAction.AddDeviceDto;
 import ru.moore.AISUchetTehniki.models.Entity.MaterialValueOrg;
 import ru.moore.AISUchetTehniki.models.Entity.Reason;
 import ru.moore.AISUchetTehniki.repositories.MaterialValueOrgRepository;
-import ru.moore.AISUchetTehniki.services.MaterialValueOrgService;
 import ru.moore.AISUchetTehniki.services.MaterialValueOrgHistoryService;
-import ru.moore.AISUchetTehniki.services.mappers.MapperUtils;
+import ru.moore.AISUchetTehniki.services.MaterialValueOrgService;
 import ru.moore.AISUchetTehniki.services.ReasonService;
+import ru.moore.AISUchetTehniki.utils.MapperUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class AddDeviceService {
+public class AddDeviceServiceImpl {
 
     private final MaterialValueOrgRepository materialValueOrgRepository;
     private final MaterialValueOrgService materialValueOrgService;
@@ -35,9 +35,9 @@ public class AddDeviceService {
     public List<MaterialValueOrgDto> saveAddDevice(List<AddDeviceDto> addDeviceDtoList) {
         try {
             List<AddDeviceDto.AddDeviceSpecDto> addDeviceSpecDtoList = new ArrayList<>();
-            for (int i = 0; i < addDeviceDtoList.size(); i++) {
-                for (int j = 0; j < addDeviceDtoList.get(i).getSpecification().size(); j++) {
-                    addDeviceSpecDtoList.add(addDeviceDtoList.get(i).getSpecification().get(j));
+            for (AddDeviceDto deviceDto : addDeviceDtoList) {
+                for (int j = 0; j < deviceDto.getSpecification().size(); j++) {
+                    addDeviceSpecDtoList.add(deviceDto.getSpecification().get(j));
                 }
             }
 
@@ -51,11 +51,11 @@ public class AddDeviceService {
                 }
             }
 
-            for (int i = 0; i < addDeviceDtoList.size(); i++) {
+            for (AddDeviceDto deviceDto : addDeviceDtoList) {
                 for (int j = 0; j < addDeviceSpecDtoList.size(); j++) {
-                        if (addDeviceDtoList.get(i).getInDeviceId().equals(addDeviceSpecDtoList.get(j).getId())) {
-                            throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Добавление в самого себя!");
-                        }
+                    if (deviceDto.getInDeviceId().equals(addDeviceSpecDtoList.get(j).getId())) {
+                        throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Добавление в самого себя!");
+                    }
                 }
             }
 

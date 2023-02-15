@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.moore.AISUchetTehniki.models.Dto.auth.SignUpRequestDTO;
-import ru.moore.AISUchetTehniki.models.Entity.Account;
 import ru.moore.AISUchetTehniki.security.dto.JwtRequest;
 import ru.moore.AISUchetTehniki.security.dto.JwtResponse;
 import ru.moore.AISUchetTehniki.security.dto.RefreshJwtRequest;

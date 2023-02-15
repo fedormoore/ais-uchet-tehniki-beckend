@@ -1,4 +1,4 @@
-package ru.moore.AISUchetTehniki.services.mappers;
+package ru.moore.AISUchetTehniki.utils;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
