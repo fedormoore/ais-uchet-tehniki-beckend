@@ -13,7 +13,9 @@ import java.util.UUID;
 public interface LocationService {
     List<LocationDto> getAllLocationList(MultiValueMap<String, String> params);
 
-    List<LocationDto> saveLocation(List<LocationDto> locationDtoList);
+    List<LocationDto> saveLocationDTOList(List<LocationDto> locationDtoList);
+
+    Location saveLocation(Location location);
 
     ResponseEntity<?> deleteLocation(List<LocationDto> locationDtoList);
 
@@ -24,6 +26,8 @@ public interface LocationService {
     List<LocationDto> getAllLocationTypeCabinet();
 
     Optional<Location> findById(UUID id);
+
+    Optional<Location> findByName(String name);
 
     void saveMainStorage();
 }

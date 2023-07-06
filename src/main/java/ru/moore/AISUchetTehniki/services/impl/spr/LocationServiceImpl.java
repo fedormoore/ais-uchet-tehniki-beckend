@@ -46,7 +46,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     @Transactional
-    public List<LocationDto> saveLocation(List<LocationDto> locationDtoList) {
+    public List<LocationDto> saveLocationDTOList(List<LocationDto> locationDtoList) {
 
         List<Location> returnLocationList = new ArrayList<>();
         for (LocationDto locationDto : locationDtoList) {
@@ -64,6 +64,12 @@ public class LocationServiceImpl implements LocationService {
 
         return mapperUtils.mapAll(returnLocationList, LocationDto.class);
 
+    }
+
+    @Override
+    public Location saveLocation(Location location) {
+        locationRepository.save(location);
+        return location;
     }
 
     private List<Location> saveChildren(List<LocationDto> locationDtoList, Location parent) {
@@ -169,6 +175,19 @@ public class LocationServiceImpl implements LocationService {
             if (locationFind.isEmpty()) {
                 throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Расположение с ID " + id + " не найдено!");
             }
+            return locationFind;
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Location> findByName(String name) {
+        if (!name.equals("")) {
+            Optional<Location> locationFind = locationRepository.findByName(name);
+//            if (locationFind.isEmpty()) {
+//                return Optional.empty();
+//            }
             return locationFind;
         } else {
             return Optional.empty();
