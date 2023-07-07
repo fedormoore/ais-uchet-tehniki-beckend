@@ -41,7 +41,7 @@ public class BudgetAccountServiceImpl implements BudgetAccountService {
 
     @Override
     @Transactional
-    public List<BudgetAccountDto> saveBudgetAccount(List<BudgetAccountDto> budgetAccountDtoList) {
+    public List<BudgetAccountDto> saveBudgetAccountDTOList(List<BudgetAccountDto> budgetAccountDtoList) {
         List<BudgetAccount> returnBudgetAccount = new ArrayList<>();
         for (BudgetAccountDto budgetAccountDto : budgetAccountDtoList) {
             //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ BUDGET_ACCOUNT ПО ID
@@ -52,6 +52,12 @@ public class BudgetAccountServiceImpl implements BudgetAccountService {
             returnBudgetAccount.add(budgetAccount);
         }
         return mapperUtils.mapAll(returnBudgetAccount, BudgetAccountDto.class);
+    }
+
+    @Override
+    public BudgetAccount saveBudgetAccount(BudgetAccount budgetAccount) {
+        budgetAccountRepository.save(budgetAccount);
+        return budgetAccount;
     }
 
     @Override
@@ -84,6 +90,16 @@ public class BudgetAccountServiceImpl implements BudgetAccountService {
             if (budgetAccountFind.isEmpty()) {
                 throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Бюджетный счет с ID " + id + " не найден!");
             }
+            return budgetAccountFind;
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<BudgetAccount> findByCodeAndName(String code, String name) {
+        if (!code.equals("") && !name.equals("")) {
+            Optional<BudgetAccount> budgetAccountFind = budgetAccountRepository.findByCodeAndName(code, name);
             return budgetAccountFind;
         } else {
             return Optional.empty();

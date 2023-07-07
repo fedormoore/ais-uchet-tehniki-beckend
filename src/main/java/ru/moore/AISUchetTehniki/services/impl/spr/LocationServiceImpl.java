@@ -185,9 +185,6 @@ public class LocationServiceImpl implements LocationService {
     public Optional<Location> findByName(String name) {
         if (!name.equals("")) {
             Optional<Location> locationFind = locationRepository.findByName(name);
-//            if (locationFind.isEmpty()) {
-//                return Optional.empty();
-//            }
             return locationFind;
         } else {
             return Optional.empty();

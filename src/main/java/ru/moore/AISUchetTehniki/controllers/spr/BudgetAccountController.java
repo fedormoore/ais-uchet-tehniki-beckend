@@ -45,7 +45,7 @@ public class BudgetAccountController {
         if (budgetAccountDtoList.size()==0){
             throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Пустой запрос.");
         }
-        return budgetAccountService.saveBudgetAccount(budgetAccountDtoList);
+        return budgetAccountService.saveBudgetAccountDTOList(budgetAccountDtoList);
     }
 
     @DeleteMapping

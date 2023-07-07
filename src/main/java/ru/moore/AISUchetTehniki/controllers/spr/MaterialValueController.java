@@ -45,7 +45,7 @@ public class MaterialValueController {
         if (materialValueDtoList.size()==0){
             throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Пустой запрос.");
         }
-        return materialValueService.saveMaterialValue(materialValueDtoList);
+        return materialValueService.saveMaterialValueDTOList(materialValueDtoList);
     }
 
     @DeleteMapping

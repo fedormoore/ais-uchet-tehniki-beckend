@@ -5,9 +5,11 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import ru.moore.AISUchetTehniki.models.Entity.spr.MaterialValueType;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface MaterialValueTypeRepository extends JpaRepository<MaterialValueType, UUID>, JpaSpecificationExecutor<MaterialValueType> {
 
+    Optional<MaterialValueType> findByName(String name);
 }

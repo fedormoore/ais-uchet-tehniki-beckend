@@ -13,11 +13,13 @@ import java.util.UUID;
 public interface BudgetAccountService {
     Page<BudgetAccountDto> getAllBudgetAccountPage(Specification<BudgetAccount> build, int page, int limit);
 
-    List<BudgetAccountDto> saveBudgetAccount(List<BudgetAccountDto> budgetAccountDtoList);
+    List<BudgetAccountDto> saveBudgetAccountDTOList(List<BudgetAccountDto> budgetAccountDtoList);
+    BudgetAccount saveBudgetAccount(BudgetAccount budgetAccount);
 
     ResponseEntity<?> deleteBudgetAccount(List<BudgetAccountDto> budgetAccountDtoList);
 
     List<BudgetAccountDto> getAllBudgetAccountList();
 
     Optional<BudgetAccount> findById(UUID id);
+    Optional<BudgetAccount> findByCodeAndName(String code, String name);
 }

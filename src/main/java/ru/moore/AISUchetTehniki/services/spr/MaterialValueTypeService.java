@@ -13,11 +13,13 @@ import java.util.UUID;
 public interface MaterialValueTypeService {
     Page<MaterialValueTypeDto> getAllMaterialValueTypePage(Specification<MaterialValueType> build, int page, int limit);
 
-    List<MaterialValueTypeDto> saveMaterialValueType(List<MaterialValueTypeDto> materialValueTypeDtoList);
+    List<MaterialValueTypeDto> saveMaterialValueTypeDTOList(List<MaterialValueTypeDto> materialValueTypeDtoList);
+    MaterialValueType saveMaterialValueType(MaterialValueType materialValueType);
 
     ResponseEntity<?> deleteMaterialValueType(List<MaterialValueTypeDto> materialValueTypeDtoList);
 
     List<MaterialValueTypeDto> getAllMaterialValueTypeList();
 
     Optional<MaterialValueType> findById(UUID id);
+    Optional<MaterialValueType> findByName(String name);
 }

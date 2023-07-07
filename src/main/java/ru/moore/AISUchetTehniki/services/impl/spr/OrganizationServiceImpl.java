@@ -46,7 +46,7 @@ public class OrganizationServiceImpl  implements OrganizationService {
 
     @Override
     @Transactional
-    public List<OrganizationDto> saveOrganization(List<OrganizationDto> organizationDtoList) {
+    public List<OrganizationDto> saveOrganizationDTOList(List<OrganizationDto> organizationDtoList) {
         List<Organization> returnOrganizationList = new ArrayList<>();
         for (OrganizationDto organizationDto : organizationDtoList) {
             //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ ORGANIZATION ПО ID
@@ -61,6 +61,12 @@ public class OrganizationServiceImpl  implements OrganizationService {
         }
 
         return mapperUtils.mapAll(returnOrganizationList, OrganizationDto.class);
+    }
+
+    @Override
+    public Organization saveOrganization(Organization organization) {
+        organizationRepository.save(organization);
+        return organization;
     }
 
     private List<Organization> saveChildren(List<OrganizationDto> organizationDtoList, Organization parent) {
@@ -176,6 +182,16 @@ public class OrganizationServiceImpl  implements OrganizationService {
             }
             return organizationFind;
         } else {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Organization> findByName(String name) {
+        if(!name.equals("")){
+            Optional<Organization> organizationFind = organizationRepository.findByName(name);
+            return organizationFind;
+        }else{
             return Optional.empty();
         }
     }

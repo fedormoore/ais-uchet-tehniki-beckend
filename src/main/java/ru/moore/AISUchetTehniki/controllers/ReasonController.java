@@ -53,7 +53,7 @@ public class ReasonController {
     @ResponseStatus(HttpStatus.OK)
     @Validated(OnSave.class)
     public ReasonContractDto saveContract(@JsonView(View.SAVE.class) @Valid @RequestBody ReasonContractDto reasonContractDto) {
-        return reasonService.saveContract(reasonContractDto);
+        return reasonService.saveContractDTO(reasonContractDto);
     }
 
     @JsonView(View.RESPONSE.class)
@@ -61,7 +61,7 @@ public class ReasonController {
     @ResponseStatus(HttpStatus.OK)
     @Validated(OnSave.class)
     public ReasonStatementDto saveStatement(@JsonView(View.SAVE.class) @Valid @RequestBody ReasonStatementDto reasonStatementDto) {
-        return reasonService.saveStatement(reasonStatementDto);
+        return reasonService.saveStatementDTO(reasonStatementDto);
     }
 
     @DeleteMapping

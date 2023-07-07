@@ -40,7 +40,7 @@ public class MaterialValueTypeServiceImpl implements MaterialValueTypeService {
 
     @Override
     @Transactional
-    public List<MaterialValueTypeDto> saveMaterialValueType(List<MaterialValueTypeDto> materialValueTypeDtoList) {
+    public List<MaterialValueTypeDto> saveMaterialValueTypeDTOList(List<MaterialValueTypeDto> materialValueTypeDtoList) {
         List<MaterialValueType> returnMaterialValueType = new ArrayList<>();
         for (MaterialValueTypeDto materialValueTypeDto : materialValueTypeDtoList) {
             //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ MATERIAL_VALUE_TYPE ПО ID
@@ -56,6 +56,12 @@ public class MaterialValueTypeServiceImpl implements MaterialValueTypeService {
         return mapperUtils.mapAll(returnMaterialValueType, MaterialValueTypeDto.class);
     }
 
+    @Override
+    public MaterialValueType saveMaterialValueType(MaterialValueType materialValueType) {
+        materialValueTypeRepository.save(materialValueType);
+        return materialValueType;
+    }
+
     private MaterialValueTypeDto toDtoMaterialValueType(MaterialValueType materialValueType) {
         return mapperUtils.map(materialValueType, MaterialValueTypeDto.class);
     }
@@ -63,11 +69,21 @@ public class MaterialValueTypeServiceImpl implements MaterialValueTypeService {
     @Override
     public Optional<MaterialValueType> findById(UUID id) {
         if (id != null) {
-            Optional<MaterialValueType> userDeviceType = materialValueTypeRepository.findById(id);
-            if (userDeviceType.isEmpty()) {
+            Optional<MaterialValueType> materialValueTypeFind = materialValueTypeRepository.findById(id);
+            if (materialValueTypeFind.isEmpty()) {
                 throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Запись не найдена!");
             }
-            return userDeviceType;
+            return materialValueTypeFind;
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<MaterialValueType> findByName(String name) {
+        if (!name.equals("")) {
+            Optional<MaterialValueType> materialValueTypeFind = materialValueTypeRepository.findByName(name);
+            return materialValueTypeFind;
         } else {
             return Optional.empty();
         }

@@ -13,7 +13,9 @@ import java.util.UUID;
 public interface OrganizationService {
     List<OrganizationDto> getAllOrganizationList(MultiValueMap<String, String> params);
 
-    List<OrganizationDto> saveOrganization(List<OrganizationDto> organizationDtoList);
+    List<OrganizationDto> saveOrganizationDTOList(List<OrganizationDto> organizationDtoList);
+
+    Organization saveOrganization(Organization organization);
 
     ResponseEntity<?> deleteOrganization(List<OrganizationDto> organizationDtoList);
 
@@ -24,4 +26,6 @@ public interface OrganizationService {
     List<OrganizationDto> getAllStructureTypeStr();
 
     Optional<Organization> findById(UUID id);
+
+    Optional<Organization> findByName(String name);
 }

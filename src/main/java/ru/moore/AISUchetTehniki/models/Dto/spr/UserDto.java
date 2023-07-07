@@ -20,7 +20,7 @@ import java.util.UUID;
 @Validated
 public class UserDto {
 
-    @JsonView({View.RESPONSE.class, View.SAVE.class,  View.DELETE.class})
+    @JsonView({View.RESPONSE.class, View.SAVE.class, View.DELETE.class})
     @NotNull(groups = {OnDelete.class}, message = "Поле 'id' не может быть пустым.")
     private UUID id;
 
@@ -79,12 +79,16 @@ public class UserDto {
     }
 
     public void setTelephone(String telephone) {
-        String result = telephone.replaceAll("\\s+", " ");
-        this.telephone = result.trim();
+        if (telephone != null) {
+            String result = telephone.replaceAll("\\s+", " ");
+            this.telephone = result.trim();
+        }
     }
 
     public void setOrganizationFunction(String organizationFunction) {
-        String result = organizationFunction.replaceAll("\\s+", " ");
-        this.organizationFunction = result.trim();
+        if (organizationFunction != null) {
+            String result = organizationFunction.replaceAll("\\s+", " ");
+            this.organizationFunction = result.trim();
+        }
     }
 }

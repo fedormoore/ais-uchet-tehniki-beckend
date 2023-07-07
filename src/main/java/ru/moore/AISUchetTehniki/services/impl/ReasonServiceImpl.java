@@ -46,7 +46,7 @@ public class ReasonServiceImpl implements ReasonService {
 
     @Override
     @Transactional
-    public ReasonContractDto saveContract(ReasonContractDto reasonContractDto) {
+    public ReasonContractDto saveContractDTO(ReasonContractDto reasonContractDto) {
         //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ REASON ПО ID
         Reason contract = findById(reasonContractDto.getId()).orElse(new Reason());
         //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ COUNTERPARTY ПО ID
@@ -78,8 +78,14 @@ public class ReasonServiceImpl implements ReasonService {
     }
 
     @Override
+    public Reason saveReason(Reason reason) {
+        reasonRepository.save(reason);
+        return reason;
+    }
+
+    @Override
     @Transactional
-    public ReasonStatementDto saveStatement(ReasonStatementDto reasonStatementDto) {
+    public ReasonStatementDto saveStatementDTO(ReasonStatementDto reasonStatementDto) {
         //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ REASON ПО ID
         Reason statement = findById(reasonStatementDto.getId()).orElse(new Reason());
         //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ ORGANIZATION ПО ID
@@ -141,6 +147,16 @@ public class ReasonServiceImpl implements ReasonService {
                 throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Контракт с ID " + id + " не найден!");
             }
             return contractFind;
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Reason> findByTypeRecordAndDateAndNumber(String typeRecord, Date date, String number) {
+        if (!typeRecord.equals("") && !date.equals("") && !number.equals("")) {
+            Optional<Reason> reasonFind = reasonRepository.findByTypeRecordAndDateAndNumber(typeRecord, date, number);
+            return reasonFind;
         } else {
             return Optional.empty();
         }
