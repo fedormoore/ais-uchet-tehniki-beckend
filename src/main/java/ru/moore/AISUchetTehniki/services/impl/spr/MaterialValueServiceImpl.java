@@ -43,7 +43,7 @@ public class MaterialValueServiceImpl implements MaterialValueService {
 
     @Override
     @Transactional
-    public List<MaterialValueDto> saveMaterialValue(List<MaterialValueDto> materialValueDtoList) {
+    public List<MaterialValueDto> saveMaterialValueDTOList(List<MaterialValueDto> materialValueDtoList) {
         List<MaterialValue> returnMaterialValueList = new ArrayList<>();
         for (MaterialValueDto materialValueDto : materialValueDtoList) {
             //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ MATERIAL_VALUE ПО ID
@@ -60,6 +60,12 @@ public class MaterialValueServiceImpl implements MaterialValueService {
             returnMaterialValueList.add(materialValue);
         }
         return mapperUtils.mapAll(returnMaterialValueList, MaterialValueDto.class);
+    }
+
+    @Override
+    public MaterialValue saveMaterialValue(MaterialValue materialValue) {
+        materialValueRepository.save(materialValue);
+        return materialValue;
     }
 
     private MaterialValueDto toDtoMaterialValue(MaterialValue materialValue) {
@@ -79,11 +85,21 @@ public class MaterialValueServiceImpl implements MaterialValueService {
     @Override
     public Optional<MaterialValue> findById(UUID id) {
         if (id != null) {
-            Optional<MaterialValue> modelFind = materialValueRepository.findById(id);
-            if (modelFind.isEmpty()) {
+            Optional<MaterialValue> materialValueFind = materialValueRepository.findById(id);
+            if (materialValueFind.isEmpty()) {
                 throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Оборудование с ID " + id + " не найдена!");
             }
-            return modelFind;
+            return materialValueFind;
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<MaterialValue> findByNameInOrgAndNameFirmAndNameModel(String nameInOrg, String nameFirm, String nameModel) {
+        if (!nameFirm.equals("") && !nameModel.equals("")) {
+            Optional<MaterialValue> materialValueFind = materialValueRepository.findByNameInOrgAndNameFirmAndNameModel(nameInOrg, nameFirm, nameModel);
+            return materialValueFind;
         } else {
             return Optional.empty();
         }

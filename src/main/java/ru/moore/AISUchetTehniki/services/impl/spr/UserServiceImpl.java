@@ -21,8 +21,8 @@ import ru.moore.AISUchetTehniki.repositories.MaterialValueOrgRepository;
 import ru.moore.AISUchetTehniki.repositories.spr.UserRepository;
 import ru.moore.AISUchetTehniki.services.spr.LocationService;
 import ru.moore.AISUchetTehniki.services.spr.OrganizationService;
-import ru.moore.AISUchetTehniki.utils.MapperUtils;
 import ru.moore.AISUchetTehniki.services.spr.UserService;
+import ru.moore.AISUchetTehniki.utils.MapperUtils;
 
 import java.util.*;
 
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<UserDto> saveUser(List<UserDto> userDtoList) {
+    public List<UserDto> saveUserDTOList(List<UserDto> userDtoList) {
         List<User> returnUser = new ArrayList<>();
         for (UserDto userDto : userDtoList) {
             //КОНТРОЛЬ: СУЩЕСТВОВАНИЕ ЗАПИСИ В БАЗЕ USER ПО ID
@@ -77,6 +77,12 @@ public class UserServiceImpl implements UserService {
             returnUser.add(user);
         }
         return mapperUtils.mapAll(returnUser, UserDto.class);
+    }
+
+    @Override
+    public User saveUser(User user) {
+        userRepository.save(user);
+        return user;
     }
 
     @Override
@@ -118,5 +124,11 @@ public class UserServiceImpl implements UserService {
         } else {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public Optional<User> findByLastNameAndFirstNameAndMiddleNames(String lastName, String firstName, String middleNames) {
+        Optional<User> userFind = userRepository.findByLastNameAndFirstNameAndMiddleNames(lastName, firstName, middleNames);
+        return userFind;
     }
 }

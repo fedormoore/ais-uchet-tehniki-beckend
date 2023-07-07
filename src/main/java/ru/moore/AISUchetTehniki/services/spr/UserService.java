@@ -13,11 +13,14 @@ import java.util.UUID;
 public interface UserService {
     Page<UserDto> getAllUserPage(Specification<User> spec, int page, int pageSize);
 
-    List<UserDto> saveUser(List<UserDto> userDtoList);
+    List<UserDto> saveUserDTOList(List<UserDto> userDtoList);
+
+    User saveUser(User user);
 
     ResponseEntity<?> deleteUser(List<UserDto> userDtoList);
 
     List<UserDto> getAllUserList();
 
     Optional<User> findById(UUID id);
+    Optional<User> findByLastNameAndFirstNameAndMiddleNames(String lastName, String firstName, String middleNames);
 }

@@ -41,7 +41,7 @@ public class LocationController {
         if (locationDtoList.size() == 0) {
             throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Пустой запрос.");
         }
-        return locationService.saveLocation(locationDtoList);
+        return locationService.saveLocationDTOList(locationDtoList);
     }
 
     @DeleteMapping

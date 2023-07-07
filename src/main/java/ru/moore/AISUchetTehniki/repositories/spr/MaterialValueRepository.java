@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import ru.moore.AISUchetTehniki.models.Entity.spr.MaterialValue;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface MaterialValueRepository extends JpaRepository<MaterialValue, UUID>, JpaSpecificationExecutor<MaterialValue> {
@@ -18,4 +19,6 @@ public interface MaterialValueRepository extends JpaRepository<MaterialValue, UU
     List<MaterialValue> findAllByMaterialValueTypeAddToOther(boolean b);
 
     List<MaterialValue> findByMaterialValueTypeId(UUID id);
+
+    Optional<MaterialValue> findByNameInOrgAndNameFirmAndNameModel(String nameInOrg, String nameFirm, String nameModel);
 }

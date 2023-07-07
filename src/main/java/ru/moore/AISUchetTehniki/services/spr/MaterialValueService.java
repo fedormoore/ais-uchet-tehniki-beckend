@@ -13,7 +13,8 @@ import java.util.UUID;
 public interface MaterialValueService {
     Page<MaterialValueDto> getAllMaterialValuePage(Specification<MaterialValue> build, int page, int limit);
 
-    List<MaterialValueDto> saveMaterialValue(List<MaterialValueDto> materialValueDtoList);
+    List<MaterialValueDto> saveMaterialValueDTOList(List<MaterialValueDto> materialValueDtoList);
+    MaterialValue saveMaterialValue(MaterialValue materialValue);
 
     ResponseEntity<?> deleteMaterialValue(List<MaterialValueDto> materialValueDtoList);
 
@@ -26,4 +27,5 @@ public interface MaterialValueService {
     List<String> getAllFirmList();
 
     Optional<MaterialValue> findById(UUID id);
+    Optional<MaterialValue> findByNameInOrgAndNameFirmAndNameModel(String nameInOrg, String nameFirm, String nameModel);
 }

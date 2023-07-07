@@ -41,7 +41,7 @@ public class OrganizationController {
         if (organizationDtoList.size() == 0) {
             throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Пустой запрос.");
         }
-        return organizationService.saveOrganization(organizationDtoList);
+        return organizationService.saveOrganizationDTOList(organizationDtoList);
     }
 
     @DeleteMapping

@@ -45,7 +45,7 @@ public class UserController {
         if (userDtoList.size() == 0) {
             throw new ErrorTemplate(HttpStatus.BAD_REQUEST, "Пустой запрос.");
         }
-        return userService.saveUser(userDtoList);
+        return userService.saveUserDTOList(userDtoList);
     }
 
     @DeleteMapping
