@@ -42,32 +42,32 @@ public class UserSpecifications {
         Specification<User> spec = Specification.where(null);
         if (params.containsKey("email") && !params.getFirst("email").isBlank()) {
             for (int i = 0; i < params.get("email").size(); i++) {
-                spec = spec.or(whereEmail(params.get("email").get(i)));
+                spec = spec.and(whereEmail(params.get("email").get(i)));
             }
         }
         if (params.containsKey("fio") && !params.getFirst("fio").isBlank()) {
             for (int i = 0; i < params.get("fio").size(); i++) {
-                spec = spec.or(whereFio(params.get("fio").get(i)));
+                spec = spec.and(whereFio(params.get("fio").get(i)));
             }
         }
         if (params.containsKey("telephone") && !params.getFirst("telephone").isBlank()) {
             for (int i = 0; i < params.get("telephone").size(); i++) {
-                spec = spec.or(whereTelephone(params.get("telephone").get(i)));
+                spec = spec.and(whereTelephone(params.get("telephone").get(i)));
             }
         }
         if (params.containsKey("location") && !params.getFirst("location").isBlank()) {
             for (int i = 0; i < params.get("location").size(); i++) {
-                spec = spec.or(whereLocation(params.get("location").get(i)));
+                spec = spec.and(whereLocation(params.get("location").get(i)));
             }
         }
         if (params.containsKey("organization") && !params.getFirst("organization").isBlank()) {
             for (int i = 0; i < params.get("organization").size(); i++) {
-                spec = spec.or(whereOrganization(params.get("organization").get(i)));
+                spec = spec.and(whereOrganization(params.get("organization").get(i)));
             }
         }
         if (params.containsKey("organizationFunction") && !params.getFirst("organizationFunction").isBlank()) {
             for (int i = 0; i < params.get("organizationFunction").size(); i++) {
-                spec = spec.or(whereOrganizationFunction(params.get("organizationFunction").get(i)));
+                spec = spec.and(whereOrganizationFunction(params.get("organizationFunction").get(i)));
             }
         }
 

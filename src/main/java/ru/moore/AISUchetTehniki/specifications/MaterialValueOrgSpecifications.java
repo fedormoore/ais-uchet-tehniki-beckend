@@ -75,31 +75,31 @@ public class MaterialValueOrgSpecifications {
         }
         if (params.containsKey("materialValue") && !params.getFirst("materialValue").isBlank()) {
             for (int i = 0; i < params.get("materialValue").size(); i++) {
-                spec = spec.or(whereMaterialValue(params.get("materialValue").get(i)));
+                spec = spec.and(whereMaterialValue(params.get("materialValue").get(i)));
             }
         }
         if (params.containsKey("barcode") && !params.getFirst("barcode").isBlank()) {
             for (int i = 0; i < params.get("barcode").size(); i++) {
-                spec = spec.or(whereBarcode(params.get("barcode").get(i)));
+                spec = spec.and(whereBarcode(params.get("barcode").get(i)));
             }
         }
         if (params.containsKey("status") && !params.getFirst("status").isBlank()) {
-            spec = spec.or(whereStatus(params.getFirst("status")));
+            spec = spec.and(whereStatus(params.getFirst("status")));
         }
         if (params.containsKey("organization") && !params.getFirst("organization").isBlank()) {
-            spec = spec.or(whereOrganization(params.getFirst("organization")));
+            spec = spec.and(whereOrganization(params.getFirst("organization")));
         }
         if (params.containsKey("location") && !params.getFirst("location").isBlank()) {
-            spec = spec.or(whereLocation(params.getFirst("location")));
+            spec = spec.and(whereLocation(params.getFirst("location")));
         }
         if (params.containsKey("budgetAccount") && !params.getFirst("budgetAccount").isBlank()) {
-            spec = spec.or(whereBudgetAccount(params.getFirst("budgetAccount")));
+            spec = spec.and(whereBudgetAccount(params.getFirst("budgetAccount")));
         }
         if (params.containsKey("responsible") && !params.getFirst("responsible").isBlank()) {
-            spec = spec.or(whereResponsible(params.getFirst("responsible")));
+            spec = spec.and(whereResponsible(params.getFirst("responsible")));
         }
         if (params.containsKey("invNumber") && !params.getFirst("invNumber").isBlank()) {
-            spec = spec.or(whereInvNumber(params.getFirst("invNumber")));
+            spec = spec.and(whereInvNumber(params.getFirst("invNumber")));
         }
         return spec;
     }

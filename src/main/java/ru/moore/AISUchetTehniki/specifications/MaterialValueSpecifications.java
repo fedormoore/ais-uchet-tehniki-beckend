@@ -26,22 +26,22 @@ public class MaterialValueSpecifications {
         Specification<MaterialValue> spec = Specification.where(null);
         if (params.containsKey("materialValueType") && !params.getFirst("materialValueType").isBlank()) {
             for (int i = 0; i < params.get("materialValueType").size(); i++) {
-                spec = spec.or(whereType(params.get("materialValueType").get(i)));
+                spec = spec.and(whereType(params.get("materialValueType").get(i)));
             }
         }
         if (params.containsKey("nameInOrg") && !params.getFirst("nameInOrg").isBlank()) {
             for (int i = 0; i < params.get("nameInOrg").size(); i++) {
-                spec = spec.or(whereNameInOrg(params.get("nameInOrg").get(i)));
+                spec = spec.and(whereNameInOrg(params.get("nameInOrg").get(i)));
             }
         }
         if (params.containsKey("nameFirm") && !params.getFirst("nameFirm").isBlank()) {
             for (int i = 0; i < params.get("nameFirm").size(); i++) {
-                spec = spec.or(whereNameFirm(params.get("nameFirm").get(i)));
+                spec = spec.and(whereNameFirm(params.get("nameFirm").get(i)));
             }
         }
         if (params.containsKey("nameModel") && !params.getFirst("nameModel").isBlank()) {
             for (int i = 0; i < params.get("nameModel").size(); i++) {
-                spec = spec.or(whereNameModel(params.get("nameModel").get(i)));
+                spec = spec.and(whereNameModel(params.get("nameModel").get(i)));
             }
         }
         return spec;

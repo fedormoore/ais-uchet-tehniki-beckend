@@ -18,12 +18,12 @@ public class BudgetAccountSpecifications {
         Specification<BudgetAccount> spec = Specification.where(null);
         if (params.containsKey("name") && !params.getFirst("name").isBlank()) {
             for (int i = 0; i < params.get("name").size(); i++) {
-                spec = spec.or(whereName(params.get("name").get(i)));
+                spec = spec.and(whereName(params.get("name").get(i)));
             }
         }
         if (params.containsKey("code") && !params.getFirst("code").isBlank()) {
             for (int i = 0; i < params.get("code").size(); i++) {
-                spec = spec.or(whereCode(params.get("code").get(i)));
+                spec = spec.and(whereCode(params.get("code").get(i)));
             }
         }
         return spec;

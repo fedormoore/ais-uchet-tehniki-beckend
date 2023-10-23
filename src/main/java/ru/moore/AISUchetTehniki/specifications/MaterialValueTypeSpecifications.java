@@ -14,7 +14,7 @@ public class MaterialValueTypeSpecifications {
         Specification<MaterialValueType> spec = Specification.where(null);
         if (params.containsKey("name") && !params.getFirst("name").isBlank()) {
             for (int i = 0; i < params.get("name").size(); i++) {
-                spec = spec.or(whereName(params.get("name").get(i)));
+                spec = spec.and(whereName(params.get("name").get(i)));
             }
         }
         return spec;

@@ -30,27 +30,27 @@ public class CounterpartySpecifications {
         Specification<Counterparty> spec = Specification.where(null);
         if (params.containsKey("name") && !params.getFirst("name").isBlank()) {
             for (int i = 0; i < params.get("name").size(); i++) {
-                spec = spec.or(whereName(params.get("name").get(i)));
+                spec = spec.and(whereName(params.get("name").get(i)));
             }
         }
         if (params.containsKey("inn") && !params.getFirst("inn").isBlank()) {
             for (int i = 0; i < params.get("inn").size(); i++) {
-                spec = spec.or(whereInn(params.get("inn").get(i)));
+                spec = spec.and(whereInn(params.get("inn").get(i)));
             }
         }
         if (params.containsKey("telephone") && !params.getFirst("telephone").isBlank()) {
             for (int i = 0; i < params.get("telephone").size(); i++) {
-                spec = spec.or(whereTelephone(params.get("telephone").get(i)));
+                spec = spec.and(whereTelephone(params.get("telephone").get(i)));
             }
         }
         if (params.containsKey("email") && !params.getFirst("email").isBlank()) {
             for (int i = 0; i < params.get("email").size(); i++) {
-                spec = spec.or(whereEmail(params.get("email").get(i)));
+                spec = spec.and(whereEmail(params.get("email").get(i)));
             }
         }
         if (params.containsKey("contact") && !params.getFirst("contact").isBlank()) {
             for (int i = 0; i < params.get("contact").size(); i++) {
-                spec = spec.or(whereContact(params.get("contact").get(i)));
+                spec = spec.and(whereContact(params.get("contact").get(i)));
             }
         }
         return spec;
